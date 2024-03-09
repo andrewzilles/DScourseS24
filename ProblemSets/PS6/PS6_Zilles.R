@@ -5,6 +5,10 @@ library(tools)
 library(maps)
 library(ggplot2)
 
+site <- read_html("https://www.espn.com/mlb/playbyplay/_/gameId/401576366")
+livetable <- site %>% html_table(header = TRUE)
+livescore <- cbind(livetable[[1]], livetable[[2]])
+print(livescore)
 
 # Read the HTML from the URL
 spring <- read_html("https://www.espn.com/mlb/team/schedule/_/name/hou/season/2024/seasontype/1")
@@ -124,6 +128,7 @@ bar_chart_stadium_with_colors <- ggplot(away_games_with_colors, aes(x = Stadium_
   scale_fill_identity() +  # Use identity scale for custom colors
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   labs(title = "Number of Games Played at Each Stadium", x = "Stadium", y = "Number of Games Played")
+
 print(bar_chart_stadium_with_colors)
 ggsave("PS6a_Zilles.png", bar_chart_stadium_with_colors)
 
