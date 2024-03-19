@@ -1,0 +1,107 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{booktabs} % Required for nicer horizontal rules in tables
+\usepackage{siunitx} % Required for \num command
+\usepackage{wrapfig} % Required for text wrapping around tables
+
+\title{PS8\_Zilles}
+\author{Andrew Zilles}
+\date{March 2024}
+
+\begin{document}
+
+\maketitle
+
+\section*{5. How does your estimate compare with the true value of ${\beta}$ in (1)?}
+
+\begin{wraptable}{l}{0.35\textwidth}
+\centering   
+\begin{tabular}[t]{lc}
+\toprule
+  & (beta\_ols\_closed)\\
+\midrule
+X1 & \num{1.5010518}\\
+X2 & \num{-1.0008296}\\
+X3 & \num{-0.2516480}\\
+X4 & \num{0.7490406}\\
+X5 & \num{3.5005531}\\
+X6 & \num{-2.0008185}\\
+X7 & \num{0.4987148}\\
+X8 & \num{1.0028269}\\
+X9 & \num{1.2465102}\\
+X10 & \num{2.0010012}\\
+\bottomrule
+\end{tabular}
+\end{wraptable}
+
+These are all very close. If I were to round to two decimal places they would all be right on. It looks like the farthest one away is off by .0035ish.
+
+
+\clearpage
+\section*{7. Do your answers differ?}
+
+\begin{wraptable}{l}{0.65 \textwidth}
+\centering
+\begin{tabular}[t]{lcc}
+\toprule
+  & (beta\_ols\_lbfgs) & (beta\_ols\_neldermead)\\
+\midrule
+X1 & \num{1.5010518} & \num{1.1770684}\\
+X2 & \num{-1.0008296} & \num{-0.9164661}\\
+X3 & \num{-0.2516480} & \num{-0.1601914}\\
+X4 & \num{0.7490406} & \num{0.9990248}\\
+X5 & \num{3.5005531} & \num{3.0740315}\\
+X6 & \num{-2.0008185} & \num{-2.2658981}\\
+X7 & \num{0.4987148} & \num{0.5961485}\\
+X8 & \num{1.0028268} & \num{0.8454130}\\
+X9 & \num{1.2465102} & \num{1.4415925}\\
+X10 & \num{2.0010012} & \num{2.0331941}\\
+\bottomrule
+\end{tabular}
+\end{wraptable}
+Yeah, quite a bit actually. L-BFGS is a virtual match with OLS closed-form solution. Nelder-Mead is quite a bit off though. Some estimates are off by around 0.5.
+
+
+\clearpage
+\section*{9. Tell me about how similar your estimates of $\hat{\beta}$ are to the “ground truth” ${\beta}$ that you used
+ to create the data in (1)}
+\begin{wraptable}{l}{0.35\textwidth}
+\centering
+\begin{tabular}[t]{lc}
+\toprule
+  & (simple lm())\\
+\midrule
+X1 & \num{1.501}\\
+ & \vphantom{9} (\num{0.002})\\
+X2 & \num{-1.001}\\
+ & \vphantom{8} (\num{0.002})\\
+X3 & \num{-0.252}\\
+ & \vphantom{7} (\num{0.002})\\
+X4 & \num{0.749}\\
+ & \vphantom{6} (\num{0.002})\\
+X5 & \num{3.501}\\
+ & \vphantom{5} (\num{0.002})\\
+X6 & \num{-2.001}\\
+ & \vphantom{4} (\num{0.002})\\
+X7 & \num{0.499}\\
+ & \vphantom{3} (\num{0.002})\\
+X8 & \num{1.003}\\
+ & \vphantom{2} (\num{0.002})\\
+X9 & \num{1.247}\\
+ & \vphantom{1} (\num{0.002})\\
+X10 & \num{2.001}\\
+ & (\num{0.002})\\
+\midrule
+Num.Obs. & \num{100000}\\
+R2 & \num{0.991}\\
+R2 Adj. & \num{0.991}\\
+AIC & \num{145143.6}\\
+BIC & \num{145248.3}\\
+Log.Lik. & \num{-72560.811}\\
+RMSE & \num{0.50}\\
+\bottomrule
+\end{tabular}
+\end{wraptable}
+Again, these are all really close and within 0.003 of the "ground truth". Most are within 0.001. They seem to be a match with the closed-form OLS estimate used in (5) above.
+
+\end{document}
