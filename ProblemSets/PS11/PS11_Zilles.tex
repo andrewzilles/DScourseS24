@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{dcolumn}
+
+\title{PS11_Zilles}
+\author{Andrew Zilles}
+\date{April 2024}
+
+\begin{document}
+
+
+\section{Introduction}
+Replication of Tax Reporting Behavior Under Audit Certainty
+by Benjamin C. Ayers, Jeri K. Seidman, Erin M. Towery
+Contemporary Accounting Research, 2019
+
+Essentially, the research question is, do firms change their reporting behavior when they know for certain that they will be audited by the IRS? This question is interesting because it explores a little more in depth the role of the IRS and how companies respond to audits. It also provides a unique environment to test if audits make firms more or less risk averse.
+
+The Ayers, Seidman, and Towery paper only looks at reported financial data. In the future I would like to expand this scope a little more and see if firms communicate differently when they are being audited vs when there is only a possibility that they might be audited. I'd like to explore the language of their 10-K filings, conference call transcripts, or other press releases to see if their tone is more limited or camouflaged in a way. (Like they're trying to "lay low" so the IRS doesn't come after them.)
+
+\section{Literature Review}
+Replication of Tax Reporting Behavior Under Audit Certainty
+by Benjamin C. Ayers, Jeri K. Seidman, Erin M. Towery
+Contemporary Accounting Research, 2019
+And others from their paper
+
+\section{Data}
+Utilization of Compustat Fundamental Annual merged with Compustat Segments
+\begin{itemize}
+    \item Firm years from 2000 - 2011
+    \item Merging the two databases together
+    \item Creating categorical variables for the CIC program's "point system"
+\end{itemize}
+
+\section{Methods}
+This is the first model I replicate from their paper. Obviously a long way to go.
+\begin{equation}
+\begin{aligned}
+\text{CICFirm} = &\alpha + \beta_1 \cdot \text{AssetPoints} + \beta_2 \cdot \text{GrossReceiptsPoints} + \gamma_1 \cdot \text{GeoSegPoints} \\
+&+ \gamma_2 \times \text{BusSegPoints} + \gamma_3 \cdot \text{ForeignSalesPoints} \\
+&+ \gamma_4 \cdot \text{ForeignTaxPoints} + \varepsilon
+\end{aligned}
+\end{equation}
+
+
+Where:
+\begin{align*}
+\text{CICFirm} & : \text{Indicator variable, where CICFirm equals 1 if the firm is assigned} \\
+& \text{to the CIC program and 0 otherwise} \\
+\alpha & : \text{Intercept} \\
+\beta_1, \beta_2 & : \text{Coefficients for AssetPoints and GrossReceiptsPoints respectively} \\
+\gamma_1, \gamma_2, \gamma_3, \gamma_4 & : \text{Coefficients for GeoSegPoints, BusSegPoints, ForeignSalesPoints,} \\
+& \text{and ForeignTaxPoints respectively} \\
+\varepsilon & : \text{Error term}
+\end{align*}
+
+The logistic regression is fitted using the binomial family with a logit link function, and the data used for modeling is from the dataset \texttt{firmyears}.
+
+\section{Findings}
+My results show that nothing is significant. But this is still very early on and I need to fine tune my models. I know I have a lot of differences with the original paper that I still need to iron out.
+See Table 1 below.
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Tue, Apr 23, 2024 - 3:26:45 PM
+% Requires LaTeX packages: dcolumn 
+\begin{table}[!htbp] \centering 
+  \caption{Logistic Regression Results} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} }
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & \multicolumn{1}{c}{CICFirm} \\ 
+\hline \\[-1.8ex] 
+ AssetPoints & 41.092 \\ 
+  & (449.795) \\ 
+  & \\ 
+ GrossReceiptsPoints & 41.211 \\ 
+  & (472.529) \\ 
+  & \\ 
+ GeoSegPoints & 41.203 \\ 
+  & (462.298) \\ 
+  & \\ 
+ BusSegPoints & 41.104 \\ 
+  & (452.480) \\ 
+  & \\ 
+ ForeignSalesPoints & 39.925 \\ 
+  & (753.931) \\ 
+  & \\ 
+ ForeignTaxPoints & 41.177 \\ 
+  & (758.447) \\ 
+  & \\ 
+ Constant & -471.954 \\ 
+  & (4,792.371) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & \multicolumn{1}{c}{47,873} \\ 
+Log Likelihood & \multicolumn{1}{c}{-0.00001} \\ 
+Akaike Inf. Crit. & \multicolumn{1}{c}{14.000} \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table}
+
+\section{Conclusion}
+I conclude that there's more work to do
+
+\end{document}
